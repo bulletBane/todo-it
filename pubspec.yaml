@@ -36,6 +36,7 @@ dependencies:
   sqflite: ^1.2.0
   email_validator: ^1.0.6
   cloud_firestore: ^0.16.0
+  adaptive_theme: ^1.1.0
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,71 +20,79 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) => Scaffold(
-        appBar: AppBar(
-          title: Text('Регистрация'),
-        ),
-        body: BlocListener<RegistrationCubit, RegistrationState>(
-          listener: (context, state) {
-            if (state is RegistrationSucces) {
-              Scaffold.of(context)
-                  .showSnackBar(SnackBar(content: Text('Успех!')));
-            }
-          },
-          child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: _emailController,
-                    validator: (value) {
-                      if (!EmailValidator.validate(value)) {
-                        return 'Введен не корректный email';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: _passwordController,
-                    validator: (value) {
-                      if (!(value.length > 6)) {
-                        return 'Пароль слишком короткий';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: _nameController,
-                    validator: (value) {
-                      if ((value.isEmpty)) {
-                        return 'Введите имя';
-                      }
-                      return null;
-                    },
-                  ),
-                  FlatButton(
-                      onPressed: () async {
-                        print('e is ${_emailController.text}');
-                        print('p is ${_passwordController.text}');
-                        if (_formKey.currentState.validate()) {
-                          BlocProvider.of<RegistrationCubit>(context)
-                              .createNewAccount(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                  name: _nameController.text);
+    return AnimatedTheme(
+      data: Theme.of(context),
+      duration: Duration(milliseconds: 100),
+      child: Builder(
+        builder: (context) => Scaffold(
+          appBar: AppBar(
+            title: Text('Регистрация'),
+            backgroundColor: Theme.of(context).primaryColor,
+          ),
+          backgroundColor: Theme.of(context).primaryColor,
+          body: BlocListener<RegistrationCubit, RegistrationState>(
+            listener: (context, state) {
+              if (state is RegistrationSucces) {
+                Scaffold.of(context)
+                    .showSnackBar(SnackBar(content: Text('Успех!')));
+              }
+            },
+            child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: _emailController,
+                      validator: (value) {
+                        if (!EmailValidator.validate(value)) {
+                          return 'Введен не корректный email';
                         }
+                        return null;
                       },
-                      child: Text('Регистрация')),
-                  FlatButton(
-                      onPressed: () async {
-                        print('e is ${_emailController.text}');
-                        print('p is ${_passwordController.text}');
-                        await FirebaseAuth.instance.signOut();
+                    ),
+                    TextFormField(
+                      controller: _passwordController,
+                      validator: (value) {
+                        if (!(value.length > 6)) {
+                          return 'Пароль слишком короткий';
+                        }
+                        return null;
                       },
-                      child: Text('Выход'))
-                ],
-              )),
+                    ),
+                    TextFormField(
+                      controller: _nameController,
+                      validator: (value) {
+                        if ((value.isEmpty)) {
+                          return 'Введите имя';
+                        }
+                        return null;
+                      },
+                    ),
+                    FlatButton(
+                        onPressed: () async {
+                          print('e is ${_emailController.text}');
+                          print('p is ${_passwordController.text}');
+                          if (_formKey.currentState.validate()) {
+                            BlocProvider.of<RegistrationCubit>(context)
+                                .createNewAccount(
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                    name: _nameController.text);
+                          }
+                        },
+                        child: Text('Регистрация')),
+                    FlatButton(
+                        onPressed: () async {
+                          print('e is ${_emailController.text}');
+                          print('p is ${_passwordController.text}');
+                          await FirebaseAuth.instance.signOut();
+                        },
+                        child: Text('Выход'))
+                  ],
+                )),
+          ),
+          floatingActionButton: FloatingActionButton(
+              onPressed: () => AdaptiveTheme.of(context).toggleThemeMode()),
         ),
       ),
     );
