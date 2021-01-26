@@ -2,21 +2,21 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_it/bloc/registration_cubit/registration_cubit.dart';
+import 'package:todo_it/bloc/login_cubit/login_cubit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_it/main.dart';
 import 'package:todo_it/presentation/pages/main/home.dart';
 
-class RegistrationPage extends StatefulWidget {
-  RegistrationPage({Key key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  LoginPage({Key key}) : super(key: key);
 
   @override
-  _RegistrationPageState createState() => _RegistrationPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _RegistrationPageState extends State<RegistrationPage> {
+class _LoginPageState extends State<LoginPage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-  TextEditingController _nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -28,14 +28,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
         builder: (context) => Scaffold(
           appBar: AppBar(
             title: Text(
-              'Регистрация',
+              'Вход',
               style: TextStyle(color: Theme.of(context).primaryColorDark),
             ),
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           ),
-          body: BlocListener<RegistrationCubit, RegistrationState>(
+          body: BlocListener<LoginCubit, LoginState>(
             listener: (context, state) {
-              if (state is RegistrationSucces) {
+              if (state is LoginSuccess) {
                 Scaffold.of(context)
                     .showSnackBar(SnackBar(content: Text('Успех!')));
                 Navigator.of(context).pushReplacement(
@@ -113,37 +113,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 return null;
                               },
                             ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            TextFormField(
-                              controller: _nameController,
-                              decoration: InputDecoration(
-                                  filled: true,
-                                  hintText: 'Введите имя',
-                                  labelText: 'Имя',
-                                  contentPadding: EdgeInsets.only(left: 15.w),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.redAccent[400])),
-                                  errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.redAccent[400])),
-                                  border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                              Theme.of(context).primaryColor))),
-                              validator: (value) {
-                                if ((value.isEmpty)) {
-                                  return 'Введите имя';
-                                }
-                                return null;
-                              },
-                            ),
                             FlatButton(
                                 onPressed: () => null,
-                                child: Text('Уже есть аккаунт? Войти')),
+                                child: Text('Нет аккаунт? Создать')),
                             FlatButton(
                                 onPressed: () =>
                                     FirebaseAuth.instance.signOut(),
@@ -166,16 +138,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.ssp)),
               child: Text(
-                'Регистрация',
+                'Войти',
               ),
               onPressed: () async {
                 print('e is ${_emailController.text}');
                 print('p is ${_passwordController.text}');
                 if (_formKey.currentState.validate()) {
-                  BlocProvider.of<RegistrationCubit>(context).createNewAccount(
-                      email: _emailController.text,
+                  BlocProvider.of<LoginCubit>(context).loginUser(
                       password: _passwordController.text,
-                      name: _nameController.text);
+                      email: _emailController.text);
                 }
               },
             ),

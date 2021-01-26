@@ -32,11 +32,11 @@ dependencies:
   firebase_auth: ^0.20.0+1
   firebase_core: ^0.7.0
   flutter_bloc: ^6.1.1
-  flutter_screenutil: ^3.1.0
   sqflite: ^1.2.0
   email_validator: ^1.0.6
   cloud_firestore: ^0.16.0
   adaptive_theme: ^1.1.0
+  flutter_screenutil: ^4.0.2+3
 
 dev_dependencies:
   flutter_test:

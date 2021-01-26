@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 
 final lightTheme = ThemeData.light().copyWith(
-    appBarTheme: AppBarTheme(color: Colors.blue[400], centerTitle: true),
-    primaryColor: Colors.blue[400]);
+    appBarTheme: AppBarTheme(
+      centerTitle: true,
+      color: Colors.white,
+    ),
+    scaffoldBackgroundColor: Colors.white,
+    primaryColorDark: Colors.black,
+    accentColor: Colors.redAccent,
+    primaryColor: Colors.blueAccent);
+
 final darkTheme = ThemeData.dark().copyWith(
-    appBarTheme: AppBarTheme(color: Colors.blue[900], centerTitle: true),
-    primaryColor: Colors.blue[900]);
+    appBarTheme: AppBarTheme(centerTitle: true),
+    scaffoldBackgroundColor: Colors.grey[900],
+    primaryColorDark: Colors.white,
+    accentColor: Colors.blueAccent,
+    primaryColor: Colors.blueAccent);
