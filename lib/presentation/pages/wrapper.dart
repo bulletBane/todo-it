@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:todo_it/bloc/auth_state_bloc/auth_state_bloc.dart';
 import 'package:todo_it/bloc/create_new_todo_cubit/create_new_todo_cubit.dart';
-import 'package:todo_it/bloc/registration_cubit/registration_cubit.dart';
 import 'package:todo_it/presentation/pages/auth/auth_wrapper.dart';
-import 'package:todo_it/presentation/pages/auth/registration_page.dart';
 import 'package:todo_it/presentation/pages/main/home.dart';
-
-import '../../main.dart';
 
 class Wraperr extends StatefulWidget {
   final ThemeData light;
@@ -30,6 +27,8 @@ class _WraperrState extends State<Wraperr> {
     return MaterialApp(
       theme: widget.light,
       darkTheme: widget.dark,
+      localizationsDelegates: [GlobalMaterialLocalizations.delegate],
+      supportedLocales: [const Locale('en'), const Locale('ru')],
       home: BlocBuilder<AuthStateBloc, AuthStateState>(
         builder: (context, state) {
           if (state is NotAuthenticatedState) {

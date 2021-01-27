@@ -11,7 +11,10 @@ final lightTheme = ThemeData.light().copyWith(
     primaryColor: Colors.blueAccent);
 
 final darkTheme = ThemeData.dark().copyWith(
-    appBarTheme: AppBarTheme(centerTitle: true),
+    appBarTheme: AppBarTheme(
+      centerTitle: true,
+      color: Colors.grey[900],
+    ),
     scaffoldBackgroundColor: Colors.grey[900],
     primaryColorDark: Colors.white,
     accentColor: Colors.blueAccent,

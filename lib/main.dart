@@ -5,16 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_it/bloc/auth_state_bloc/auth_state_bloc.dart';
 import 'package:todo_it/bloc/create_new_todo_cubit/create_new_todo_cubit.dart';
-import 'package:todo_it/bloc/registration_cubit/registration_cubit.dart';
 import 'package:todo_it/presentation/pages/auth/auth_wrapper.dart';
-import 'package:todo_it/presentation/pages/auth/registration_page.dart';
 import 'package:todo_it/presentation/pages/wrapper.dart';
 import 'package:todo_it/presentation/shared/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-// import 'package:my_todo/presentation/screens/home_page.dart';
-
-// import 'business_logic/blocs/todo_bloc/todos_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

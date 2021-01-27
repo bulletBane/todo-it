@@ -27,10 +27,11 @@ class TodoAction {
         ));
   }
 
-  Widget dateButton(BuildContext context) {
+  Widget dateButton(
+      {BuildContext context, VoidCallback onPressed, int dif = 0}) {
     return FlatButton(
         padding: EdgeInsets.all(3.ssp),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Row(
           children: [
             Icon(
@@ -41,7 +42,9 @@ class TodoAction {
               width: 3.w,
             ),
             Text(
-              'Сегодня',
+              dif == null
+                  ? 'Сегодня'
+                  : '${dif.toString()} ${((dif.abs() % 10 < 5 && dif.abs() % 10 > 1)) ? 'дня' : dif.abs() % 10 == 1 ? 'день' : dif.abs() % 10 == 0 || (dif.abs() % 10 > 5 && dif.abs() % 10 < 10) ? 'дней' : ''}',
               style: TextStyle(
                   color: Theme.of(context).primaryColorDark,
                   fontWeight: FontWeight.w400,
