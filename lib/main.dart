@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_it/bloc/auth_state_bloc/auth_state_bloc.dart';
 import 'package:todo_it/bloc/create_new_todo_cubit/create_new_todo_cubit.dart';
+import 'package:todo_it/bloc/get_tasks_cubit/get_tasks_cubit.dart';
 import 'package:todo_it/presentation/pages/auth/auth_wrapper.dart';
 import 'package:todo_it/presentation/pages/wrapper.dart';
 import 'package:todo_it/presentation/shared/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'bloc/task_page_logic/get_todos_cubit/get_todos_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,18 +46,12 @@ class MyApp extends StatelessWidget {
                 light: lightTheme,
                 dark: darkTheme,
                 initial: savedThemeMode ?? AdaptiveThemeMode.system,
-                builder: (theme, darkTheme) => MultiBlocProvider(
-                        providers: [
-                          BlocProvider(
-                            create: (context) => AuthStateBloc(),
-                          ),
-                          BlocProvider(
-                              create: (context) => CreateNewTodoCubit())
-                        ],
-                        child: Wraperr(
-                          light: theme,
-                          dark: darkTheme,
-                        )));
+                builder: (theme, darkTheme) => BlocProvider(
+                    create: (context) => AuthStateBloc(),
+                    child: Wraperr(
+                      light: theme,
+                      dark: darkTheme,
+                    )));
           }
           return Center(
             child: CircularProgressIndicator(),

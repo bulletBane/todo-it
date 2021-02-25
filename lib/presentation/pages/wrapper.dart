@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:todo_it/bloc/auth_state_bloc/auth_state_bloc.dart';
 import 'package:todo_it/bloc/create_new_todo_cubit/create_new_todo_cubit.dart';
+import 'package:todo_it/bloc/get_tasks_cubit/get_tasks_cubit.dart';
 import 'package:todo_it/presentation/pages/auth/auth_wrapper.dart';
 import 'package:todo_it/presentation/pages/main/home.dart';
 
@@ -34,10 +35,12 @@ class _WraperrState extends State<Wraperr> {
           if (state is NotAuthenticatedState) {
             return AuthWrapperPage();
           } else if (state is AuthenticatedState) {
-            return BlocProvider(
-              create: (context) => CreateNewTodoCubit(),
-              child: HomePage(),
-            );
+            return MultiBlocProvider(providers: [
+              BlocProvider(
+                create: (context) => GetTasksCubit(),
+              ),
+              BlocProvider(create: (context) => CreateNewTaskCubit())
+            ], child: HomePage());
           }
           return CircularProgressIndicator();
         },

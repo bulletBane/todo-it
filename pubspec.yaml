@@ -35,10 +35,12 @@ dependencies:
   firebase_core: ^0.7.0
   flutter_bloc: ^6.1.1
   sqflite: ^1.2.0
+  date_format: ^1.0.9
   email_validator: ^1.0.6
   cloud_firestore: ^0.16.0
   adaptive_theme: ^1.1.0
   flutter_screenutil: ^4.0.2+3
+  shared_preferences: ^0.5.12+4
 
 dev_dependencies:
   flutter_test:

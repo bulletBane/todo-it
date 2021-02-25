@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:todo_it/bloc/create_new_todo_cubit/create_new_todo_cubit.dart';
+import 'package:todo_it/data/models/list_type.dart';
+import 'package:todo_it/data/models/task.dart';
 import 'package:todo_it/presentation/widgets/todo_actions.dart';
 
 class TodoBlock extends StatefulWidget {
@@ -18,7 +22,17 @@ class _TodoBlockState extends State<TodoBlock> {
       child: Container(
           width: 1.sw,
           child: InkWell(
-            onTap: () => null,
+            onTap: () {
+              ListType type = ListType(name: 'Work');
+              Task task = Task(
+                  title: 'Finish with task create',
+                  startDate: DateTime.now(),
+                  dueDate: DateTime.now(),
+                  description: 'Finish this task',
+                  priority: TaskPriority.LOW,
+                  list: type);
+              BlocProvider.of<CreateNewTaskCubit>(context).createNewTask(task);
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

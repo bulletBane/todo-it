@@ -11,7 +11,7 @@ class TodoAction {
           children: [
             Icon(
               Icons.flag_outlined,
-              size: 25.ssp,
+              size: 20.ssp,
             ),
             SizedBox(
               width: 3.w,
@@ -21,7 +21,7 @@ class TodoAction {
               style: TextStyle(
                   color: Theme.of(context).primaryColorDark,
                   fontWeight: FontWeight.w400,
-                  fontSize: 16.ssp),
+                  fontSize: 12.ssp),
             )
           ],
         ));
@@ -36,7 +36,7 @@ class TodoAction {
           children: [
             Icon(
               Icons.calendar_today_outlined,
-              size: 25.ssp,
+              size: 20.ssp,
             ),
             SizedBox(
               width: 3.w,
@@ -48,7 +48,7 @@ class TodoAction {
               style: TextStyle(
                   color: Theme.of(context).primaryColorDark,
                   fontWeight: FontWeight.w400,
-                  fontSize: 16.ssp),
+                  fontSize: 12.ssp),
             )
           ],
         ));
@@ -72,7 +72,7 @@ class TodoAction {
               style: TextStyle(
                   color: Theme.of(context).primaryColorDark,
                   fontWeight: FontWeight.w400,
-                  fontSize: 16.ssp),
+                  fontSize: 12.ssp),
             )
           ],
         ));

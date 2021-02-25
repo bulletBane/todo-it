@@ -1,23 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:todo_it/data/models/todo.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:todo_it/data/models/task.dart';
 
 class CreateTodoRepo {
   CollectionReference _usersCollection =
       FirebaseFirestore.instance.collection('users');
+  CollectionReference _taskCollection =
+      FirebaseFirestore.instance.collection('tasks');
+  String uid = FirebaseAuth.instance.currentUser.uid;
+
   void createTodo({
-    final Todo todo,
-    final String uid,
-  }) {
+    Task task,
+  }) async {
+    String taskUID =
+        await _taskCollection.add(task.toJSON()).then((value) => value.id);
+    print('TASK UID == $taskUID');
     _usersCollection.doc(uid).update({
-      'todos': FieldValue.arrayUnion([
-        {
-          "title": todo.title,
-          "list": todo.list,
-          "priority": todo.priority,
-          "startDate": todo.startDate,
-          "dueDate": todo.dueDate
-        }
-      ])
+      'tasks': FieldValue.arrayUnion([taskUID])
     });
   }
 }
